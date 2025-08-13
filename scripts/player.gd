@@ -14,8 +14,14 @@ func _ready():
 	print("Player _ready() called")
 	print("Initial position: ", global_position)
 	print("Initial scale: ", scale)
-	_place_at_bottom()
-	print("After _place_at_bottom: ", global_position)
+	
+	# 不要立即設置位置，等待遊戲開始
+	# _place_at_bottom()
+	
+	# 初始狀態設為不可見和不處理
+	visible = false
+	set_process(false)
+	set_physics_process(false)
 
 func _notification(what):
 	if what == NOTIFICATION_WM_SIZE_CHANGED:

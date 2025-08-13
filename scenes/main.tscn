@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dapj2ggjb2pi2"]
+[gd_scene load_steps=14 format=3 uid="uid://dapj2ggjb2pi2"]
 
 [ext_resource type="Texture2D" uid="uid://dxnlfwjrtdk43" path="res://media/blue-sky-background.png" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://0lypo463lmuq" path="res://scripts/main.gd" id="1_choun"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://ddkc7v2ay0scy" path="res://scenes/mouthwash-soldier.tscn" id="7_85g3d"]
 [ext_resource type="PackedScene" uid="uid://b2tocf1xvgjvm" path="res://scenes/pot-mama.tscn" id="8_choun"]
 [ext_resource type="PackedScene" uid="uid://bxamuo2d0fojg" path="res://scenes/bullet.tscn" id="9_85g3d"]
+[ext_resource type="Texture2D" uid="uid://bgw8ldq4j2mfk" path="res://media/game-title.png" id="10_title"]
+[ext_resource type="Texture2D" uid="uid://1rjb1nyk8yyr" path="res://media/start-button.png" id="11_button"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_choun"]
 radius = 435.0
@@ -21,7 +23,6 @@ script = ExtResource("1_choun")
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -10
 position = Vector2(512, 512)
-scale = Vector2(2, 2)
 texture = ExtResource("1_0wfyh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -47,7 +48,7 @@ position = Vector2(0, 254)
 scale = Vector2(0.1, 0.1)
 
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(0, 400)
+position = Vector2(-373, -82)
 scale = Vector2(0.2, 0.2)
 script = ExtResource("2_jyhfs")
 bullet_scene = ExtResource("9_85g3d")
@@ -61,3 +62,31 @@ shape = SubResource("CapsuleShape2D_choun")
 
 [node name="BulletSpawn" type="Marker2D" parent="Player"]
 position = Vector2(0, -50)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="StartScreen" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameTitle" type="TextureRect" parent="UI/StartScreen"]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 150.0
+offset_right = 1178.0
+offset_bottom = 1174.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("10_title")
+
+[node name="StartButton" type="TextureButton" parent="UI/StartScreen"]
+layout_mode = 0
+offset_left = 415.0
+offset_top = 575.0
+offset_right = 1439.0
+offset_bottom = 1599.0
+scale = Vector2(0.2, 0.2)
+texture_normal = ExtResource("11_button")
