@@ -16,15 +16,13 @@ func _on_timer_timeout() -> void:
 	spawn_enemy()
 
 func get_spawn_position() -> Vector2:
-	var vr := get_viewport().get_visible_rect()
-	
-	# 完全隨機的 X 位置，覆蓋整個螢幕寬度
-	var left := vr.position.x + x_margin
-	var right := vr.position.x + vr.size.x - x_margin
+	# 使用硬編碼的 1024x1024 視窗大小
+	var left := x_margin  # 50
+	var right := 1024 - x_margin  # 974
 	var x := randf_range(left, right)
 	
-	# Y 位置也增加隨機性，避免同時出現
-	var y := vr.position.y - randf_range(20.0, 150.0)
+	# Y 位置在螢幕上方生成
+	var y := randf_range(-150.0, -20.0)
 	
 	return Vector2(x, y)
 

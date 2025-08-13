@@ -8,6 +8,9 @@ extends Area2D
 var _t := 0.0
 
 func _ready():
+	# 設置子彈縮放為合適大小
+	scale = Vector2(0.1, 0.1)
+	
 	# 連接碰撞檢測信號
 	area_entered.connect(_on_area_entered)
 

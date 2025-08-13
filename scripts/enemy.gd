@@ -43,10 +43,17 @@ func _flash_damage():
 func _physics_process(delta: float) -> void:
 	position.y += speed * delta
 
-	# 只檢查「觸碰到底邊」就算遊戲結束（你要四邊都算也可改）
-	var vr := get_viewport().get_visible_rect()
-	var bottom := vr.position.y + vr.size.y
-	if position.y >= bottom - bottom_margin:
+	# 檢查所有邊界，使用硬編碼的 1024x1024 視窗
+	var screen_margin := 50.0  # 邊界緩衝區
+	
+	# 限制左右邊界
+	position.x = clamp(position.x, screen_margin, 1024 - screen_margin)
+	
+	# 檢查是否觸碰到底邊（遊戲結束條件）
+	if position.y >= 1024 - bottom_margin:
 		emit_signal("touched_boundary")
-		# 可視需要：也可先停掉自己
-		set_process(false)
+		set_process(false)  # 停止處理
+	
+	# 如果敵人跑到太遠的地方，直接刪除（清理）
+	if position.y > 1200:  # 超出螢幕很多
+		queue_free()

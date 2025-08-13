@@ -43,13 +43,14 @@ func _physics_process(delta):
 	
 	move_and_slide()
 
-	# 限制玩家在螢幕範圍內 - 使用簡單的硬編碼值
-	var left  := screen_margin  # 12
-	var right := 1024 - screen_margin  # 1012
+	# 限制玩家在螢幕範圍內 - 考慮玩家的碰撞箱大小
+	var player_width := 50.0  # 考慮玩家縮放後的大小
+	var left  := player_width
+	var right := 1024 - player_width
 	
 	# 保持在底部，只限制左右邊界
 	global_position.x = clamp(global_position.x, left, right)
-	global_position.y = 950  # 固定在底部
+	global_position.y = 900  # 固定在底部
 
 	# 射擊邏輯
 	_cd = max(_cd - delta, 0.0)
