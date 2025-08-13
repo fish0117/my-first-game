@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddkc7v2ay0scy"]
+
+[ext_resource type="PackedScene" uid="uid://d3uyqbtsxvsab" path="res://scenes/enemy.tscn" id="1_0e2f3"]
+
+[node name="Area2D" instance=ExtResource("1_0e2f3")]
+
+[node name="Sprite2D" parent="." index="1"]
+position = Vector2(-13, -5)
+scale = Vector2(1.0293, 1.0293)

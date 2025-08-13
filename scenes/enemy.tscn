@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3uyqbtsxvsab"]
+
+[ext_resource type="Script" uid="uid://dy36q47qreisa" path="res://scripts/enemy.gd" id="1_md0e3"]
+[ext_resource type="Texture2D" uid="uid://duhdgt3af3nic" path="res://media/mouthwash-soldier.png" id="2_4ra3w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4gyqm"]
+radius = 524.001
+
+[node name="Area2D" type="Area2D"]
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_md0e3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(11, -23)
+shape = SubResource("CircleShape2D_4gyqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4ra3w")

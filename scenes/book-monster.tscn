@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1bf5hqvog5vr"]
+
+[ext_resource type="PackedScene" uid="uid://d3uyqbtsxvsab" path="res://scenes/enemy.tscn" id="1_wslys"]
+[ext_resource type="Texture2D" uid="uid://cudfbfwn88jux" path="res://media/book-monster.png" id="2_qoonp"]
+
+[node name="Area2D" instance=ExtResource("1_wslys")]
+
+[node name="Sprite2D" parent="." index="1"]
+position = Vector2(50, -64)
+texture = ExtResource("2_qoonp")

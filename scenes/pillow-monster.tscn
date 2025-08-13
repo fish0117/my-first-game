@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b770k8t31a6bd"]
+
+[ext_resource type="PackedScene" uid="uid://d3uyqbtsxvsab" path="res://scenes/enemy.tscn" id="1_twb5g"]
+[ext_resource type="Texture2D" uid="uid://q4yljy6m80ok" path="res://media/pillow-monster.png" id="2_h6bcs"]
+
+[node name="Area2D" instance=ExtResource("1_twb5g")]
+
+[node name="Sprite2D" parent="." index="1"]
+position = Vector2(-2, 10)
+scale = Vector2(1.13281, 1.125)
+texture = ExtResource("2_h6bcs")

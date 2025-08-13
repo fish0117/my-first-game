@@ -1,0 +1,66 @@
+[gd_scene load_steps=12 format=3 uid="uid://dapj2ggjb2pi2"]
+
+[ext_resource type="Texture2D" uid="uid://dxnlfwjrtdk43" path="res://media/blue-sky-background.png" id="1_0wfyh"]
+[ext_resource type="Script" uid="uid://0lypo463lmuq" path="res://scripts/main.gd" id="1_choun"]
+[ext_resource type="Script" uid="uid://mdnhpjwnj6kn" path="res://scripts/player.gd" id="2_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://csq2a7gw248gn" path="res://media/player.png" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://cvndoapj2dc24" path="res://scenes/enemy-spawner.tscn" id="2_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://c1bf5hqvog5vr" path="res://scenes/book-monster.tscn" id="3_tefeu"]
+[ext_resource type="PackedScene" uid="uid://b770k8t31a6bd" path="res://scenes/pillow-monster.tscn" id="6_tipki"]
+[ext_resource type="PackedScene" uid="uid://ddkc7v2ay0scy" path="res://scenes/mouthwash-soldier.tscn" id="7_85g3d"]
+[ext_resource type="PackedScene" uid="uid://b2tocf1xvgjvm" path="res://scenes/pot-mama.tscn" id="8_choun"]
+[ext_resource type="PackedScene" uid="uid://bxamuo2d0fojg" path="res://scenes/bullet.tscn" id="9_85g3d"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_choun"]
+radius = 435.0
+height = 1000.0
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_choun")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_0wfyh")
+stretch_mode = 6
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(512, 512)
+
+[node name="EnemySpawner" parent="." instance=ExtResource("2_tbgi4")]
+
+[node name="PillowMonster" parent="." instance=ExtResource("6_tipki")]
+position = Vector2(354, -373)
+
+[node name="BookMonster" parent="." instance=ExtResource("3_tefeu")]
+position = Vector2(103, -365)
+
+[node name="MouthwashSoldier" parent="." instance=ExtResource("7_85g3d")]
+position = Vector2(-363, -376)
+
+[node name="PotMama" parent="." instance=ExtResource("8_choun")]
+position = Vector2(-124, -371)
+
+[node name="Bullet" parent="." instance=ExtResource("9_85g3d")]
+visible = false
+position = Vector2(0, 254)
+scale = Vector2(0.1, 0.1)
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(0, 400)
+scale = Vector2(0.2, 0.2)
+script = ExtResource("2_jyhfs")
+bullet_scene = ExtResource("9_85g3d")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("2_sugp2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(10, 35)
+shape = SubResource("CapsuleShape2D_choun")
+
+[node name="BulletSpawn" type="Marker2D" parent="Player"]
+position = Vector2(0, -50)

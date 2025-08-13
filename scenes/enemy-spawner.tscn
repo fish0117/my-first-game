@@ -1,0 +1,13 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvndoapj2dc24"]
+
+[ext_resource type="Script" uid="uid://djh348yoh1nq3" path="res://scripts/enemy_spawner.gd" id="1_u3o1b"]
+[ext_resource type="PackedScene" uid="uid://c1bf5hqvog5vr" path="res://scenes/book-monster.tscn" id="2_cmo7c"]
+[ext_resource type="PackedScene" uid="uid://ddkc7v2ay0scy" path="res://scenes/mouthwash-soldier.tscn" id="3_6rokl"]
+[ext_resource type="PackedScene" uid="uid://b770k8t31a6bd" path="res://scenes/pillow-monster.tscn" id="4_jjdwi"]
+[ext_resource type="PackedScene" uid="uid://b2tocf1xvgjvm" path="res://scenes/pot-mama.tscn" id="5_ppmyb"]
+
+[node name="Enemy-spawner" type="Node2D"]
+script = ExtResource("1_u3o1b")
+enemy_scenes = Array[PackedScene]([ExtResource("2_cmo7c"), ExtResource("3_6rokl"), ExtResource("4_jjdwi"), ExtResource("5_ppmyb")])
+
+[node name="Timer" type="Timer" parent="."]

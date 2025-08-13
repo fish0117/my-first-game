@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2tocf1xvgjvm"]
+
+[ext_resource type="PackedScene" uid="uid://d3uyqbtsxvsab" path="res://scenes/enemy.tscn" id="1_4hobv"]
+[ext_resource type="Texture2D" uid="uid://b8fwqkh10tm80" path="res://media/pot-mama.png" id="2_gh3fw"]
+
+[node name="Area2D" instance=ExtResource("1_4hobv")]
+
+[node name="Sprite2D" parent="." index="1"]
+position = Vector2(-26, -30)
+scale = Vector2(1.17578, 1.17578)
+texture = ExtResource("2_gh3fw")
