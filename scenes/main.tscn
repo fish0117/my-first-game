@@ -5,13 +5,13 @@
 [ext_resource type="Script" uid="uid://mdnhpjwnj6kn" path="res://scripts/player.gd" id="2_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://csq2a7gw248gn" path="res://media/player.png" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cvndoapj2dc24" path="res://scenes/enemy-spawner.tscn" id="2_tbgi4"]
-[ext_resource type="PackedScene" uid="uid://c1bf5hqvog5vr" path="res://scenes/book-monster.tscn" id="3_tefeu"]
-[ext_resource type="PackedScene" uid="uid://b770k8t31a6bd" path="res://scenes/pillow-monster.tscn" id="6_tipki"]
-[ext_resource type="PackedScene" uid="uid://ddkc7v2ay0scy" path="res://scenes/mouthwash-soldier.tscn" id="7_85g3d"]
-[ext_resource type="PackedScene" uid="uid://b2tocf1xvgjvm" path="res://scenes/pot-mama.tscn" id="8_choun"]
 [ext_resource type="PackedScene" uid="uid://bxamuo2d0fojg" path="res://scenes/bullet.tscn" id="9_85g3d"]
 [ext_resource type="Texture2D" uid="uid://bgw8ldq4j2mfk" path="res://media/game-title.png" id="10_title"]
 [ext_resource type="Texture2D" uid="uid://1rjb1nyk8yyr" path="res://media/start-button.png" id="11_button"]
+[ext_resource type="Texture2D" uid="uid://cpj3bjq0tt0ij" path="res://media/game-over-title.png" id="13_jkv2x"]
+[ext_resource type="FontFile" uid="uid://dfprpgesngchc" path="res://media/Cubic_11.ttf" id="14_jbj1t"]
+[ext_resource type="Texture2D" uid="uid://3ks3jvieib4c" path="res://media/restart-button.png" id="15_muem4"]
+[ext_resource type="Texture2D" uid="uid://b4k66r3leus1l" path="res://media/good-morning.png" id="16_goodmorning"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_choun"]
 radius = 435.0
@@ -30,18 +30,6 @@ position = Vector2(512, 512)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("2_tbgi4")]
 
-[node name="PillowMonster" parent="." instance=ExtResource("6_tipki")]
-position = Vector2(354, -373)
-
-[node name="BookMonster" parent="." instance=ExtResource("3_tefeu")]
-position = Vector2(103, -365)
-
-[node name="MouthwashSoldier" parent="." instance=ExtResource("7_85g3d")]
-position = Vector2(-363, -376)
-
-[node name="PotMama" parent="." instance=ExtResource("8_choun")]
-position = Vector2(-124, -371)
-
 [node name="Bullet" parent="." instance=ExtResource("9_85g3d")]
 visible = false
 position = Vector2(0, 254)
@@ -51,6 +39,7 @@ scale = Vector2(0.1, 0.1)
 position = Vector2(-373, -82)
 scale = Vector2(0.2, 0.2)
 script = ExtResource("2_jyhfs")
+move_speed = 600.0
 bullet_scene = ExtResource("9_85g3d")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
@@ -66,6 +55,7 @@ position = Vector2(0, -50)
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="StartScreen" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,9 +74,187 @@ texture = ExtResource("10_title")
 
 [node name="StartButton" type="TextureButton" parent="UI/StartScreen"]
 layout_mode = 0
-offset_left = 415.0
+offset_left = 407.0
 offset_top = 575.0
-offset_right = 1439.0
+offset_right = 1431.0
 offset_bottom = 1599.0
 scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("11_button")
+
+[node name="ScoreBoard" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 60.0
+
+[node name="ScoreLabel" type="Label" parent="UI/ScoreBoard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -1.0
+offset_right = -8.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("14_jbj1t")
+theme_override_font_sizes/font_size = 36
+text = "Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameTimer" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 824.0
+offset_top = 20.0
+offset_right = 1004.0
+offset_bottom = 60.0
+
+[node name="TimeLabel" type="Label" parent="UI/GameTimer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -1.0
+offset_right = 8.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("14_jbj1t")
+theme_override_font_sizes/font_size = 36
+text = "Time: 60"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameOverScreen" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverImage" type="TextureRect" parent="UI/GameOverScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -436.0
+offset_right = 664.0
+offset_bottom = 588.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("13_jkv2x")
+
+[node name="FinalScoreLabel" type="Label" parent="UI/GameOverScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 107.0
+offset_right = 150.0
+offset_bottom = 149.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("14_jbj1t")
+theme_override_font_sizes/font_size = 36
+text = "Final Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="TextureButton" parent="UI/GameOverScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = 111.0
+offset_right = 919.0
+offset_bottom = 1135.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+texture_normal = ExtResource("15_muem4")
+
+[node name="GoodMorningScreen" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GoodMorningImage" type="TextureRect" parent="UI/GoodMorningScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -352.0
+offset_top = -430.0
+offset_right = 672.0
+offset_bottom = 594.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("16_goodmorning")
+
+[node name="FinalScoreLabel" type="Label" parent="UI/GoodMorningScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 103.0
+offset_right = 150.0
+offset_bottom = 153.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("14_jbj1t")
+theme_override_font_sizes/font_size = 36
+text = "Final Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ContinueButton" type="TextureButton" parent="UI/GoodMorningScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = 111.0
+offset_right = 919.0
+offset_bottom = 1135.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+texture_normal = ExtResource("15_muem4")

@@ -13,11 +13,13 @@ func _ready() -> void:
 	_timer.wait_time = spawn_interval
 	_timer.timeout.connect(_on_timer_timeout)
 	
-	# 不要立即開始，等待遊戲開始
-	# _timer.start()
+	# 確保計時器不會自動啟動
+	_timer.stop()
 	
 	# 初始狀態設為不處理
 	set_process(false)
+	
+	print("敵人生成器初始化完成，處於停止狀態")
 
 func _on_timer_timeout() -> void:
 	spawn_enemy()
