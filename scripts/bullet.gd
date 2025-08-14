@@ -1,24 +1,21 @@
 extends Area2D
 
-@export var speed: float = 1400.0      # 子彈速度
-@export var lifetime: float = 3.0      # 最長存活秒數（保險）
-@export var margin: float = 32.0       # 超出螢幕多少就刪
-@export var damage: int = 1            # 子彈傷害值
+@export var speed: float = 1400.0
+@export var lifetime: float = 3.0
+@export var margin: float = 32.0
+@export var damage: int = 1
 
 var _t := 0.0
 
 func _ready():
-	# 設置子彈縮放為合適大小
 	scale = Vector2(0.1, 0.1)
-	
-	# 連接碰撞檢測信號
+	add_to_group("bullets")
 	area_entered.connect(_on_area_entered)
 
 func _on_area_entered(area: Area2D):
-	# 檢查是否擊中敵人
 	if area.has_method("take_damage"):
 		area.take_damage(damage)
-		queue_free()  # 子彈銷毀
+		queue_free()
 
 func _physics_process(delta: float) -> void:
 	position.y -= speed * delta
